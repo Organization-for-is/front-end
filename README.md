@@ -34,6 +34,8 @@ Abre `http://127.0.0.1:5173`. El mismo comando inicia la API en `http://localhos
 
 ## API
 
+Abre `http://localhost:3001/docs` en local o añade `/docs` a la URL de Render para usar Swagger UI. Expande `GET /api/health`, pulsa **Try it out** y luego **Execute**. Una respuesta HTTP `200` con `{"status":"ok","demo":true}` confirma que la API responde. La especificación está disponible en `/openapi.json`.
+
 - `GET /api/health` comprueba el estado del servicio.
 - `GET /api/opportunities` lista convocatorias. Acepta `q`, `region` y `category`.
 - `GET /api/opportunities/:id` devuelve el expediente de ejemplo.

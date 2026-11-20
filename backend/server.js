@@ -1,5 +1,9 @@
 import { createServer } from 'node:http';
+import { readFile } from 'node:fs/promises';
 import { catalog } from './catalog.js';
+import { openapi } from './openapi.js';
+
+const swaggerPage = await readFile(new URL('./swagger.html', import.meta.url));
 
 const origins = (process.env.FRONTEND_ORIGINS || '*').split(',').map(origin => origin.trim());
 const normalize = value => value.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase();
@@ -32,6 +36,11 @@ createServer(async (request, response) => {
   const {pathname,searchParams} = new URL(request.url, 'http://localhost');
   const {method} = request;
   try {
+    if (method === 'GET' && (pathname === '/docs' || pathname === '/docs/')) {
+      response.writeHead(200, {'Content-Type':'text/html; charset=utf-8'});
+      return response.end(swaggerPage);
+    }
+    if (method === 'GET' && pathname === '/openapi.json') return send(200,openapi);
     if (method === 'GET' && pathname === '/api/health') return send(200,{status:'ok',demo:true});
     if (method === 'GET' && pathname === '/api/opportunities') {
       const query = normalize(searchParams.get('q') || '').trim();
