@@ -29,7 +29,7 @@ Abre `http://127.0.0.1:5173`. El mismo comando inicia la API en `http://localhos
 
 1. Sube los archivos del proyecto al repositorio de GitHub.
 2. En Render, crea un Blueprint desde el repositorio para usar `render.yaml`. Si creas un Web Service manualmente, selecciona `backend` como directorio raíz, `npm install` como comando de compilación, `npm start` como comando de inicio y `/api/health` como ruta de verificación.
-3. En Vercel, importa el mismo repositorio y configura `frontend` como **Root Directory**. El archivo `vercel.json` configura el comando de compilación y el directorio de salida. Agrega `PUBLIC_API_URL` con el origen HTTPS de Render, por ejemplo `https://radar-publico-api.onrender.com`.
+3. En Vercel, importa el mismo repositorio. Con **Root Directory** en `./`, la salida es `frontend/dist`. Si eliges `frontend` como raíz, la salida es `dist`. Cada directorio tiene su propio `vercel.json` con `npm run build` y la ruta de salida correspondiente. Agrega `PUBLIC_API_URL` con el origen HTTPS de Render, por ejemplo `https://radar-publico-api.onrender.com`.
 4. Opcionalmente, configura `FRONTEND_ORIGINS` en Render con los orígenes permitidos separados por comas, por ejemplo `https://radar-publico.vercel.app,http://127.0.0.1:5173`. Si se omite, la API de demostración permite peticiones desde cualquier origen.
 
 ## API
